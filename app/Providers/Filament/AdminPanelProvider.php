@@ -28,7 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->registration()
+            ->profile()
             ->authGuard('admin')
             ->colors([
                 'primary' => Color::Amber,

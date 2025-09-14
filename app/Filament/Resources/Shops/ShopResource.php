@@ -51,7 +51,7 @@ class ShopResource extends Resource
         return [
             'index' => ListShops::route('/'),
             'create' => CreateShop::route('/create'),
-            'edit' => EditShop::route('/{record}/edit'),
+            // 'edit' => EditShop::route('/{record}/edit'),
         ];
     }
 }

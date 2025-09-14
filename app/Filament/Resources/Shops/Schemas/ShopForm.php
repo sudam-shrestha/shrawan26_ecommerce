@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Shops\Schemas;
 
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -11,24 +13,15 @@ class ShopForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
-                    ->required(),
-                TextInput::make('email')
-                    ->label('Email address')
-                    ->email()
-                    ->required(),
-                TextInput::make('phone')
-                    ->tel()
-                    ->required(),
-                TextInput::make('password')
-                    ->password()
-                    ->default(null),
-                TextInput::make('photo')
-                    ->default(null),
-                TextInput::make('status')
+                Select::make('status')
                     ->required()
+                    ->options([
+                        'pending' => 'Pending',
+                        'active' => 'Active',
+                        'inactive' => 'Inactive',
+                    ])
                     ->default('pending'),
-                TextInput::make('expire_date')
+                DatePicker::make('expire_date')
                     ->default(null),
             ]);
     }
