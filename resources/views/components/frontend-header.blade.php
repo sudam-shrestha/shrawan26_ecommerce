@@ -23,11 +23,48 @@
 
         <!-- Login -->
         <div>
-            <a href="/login" class="px-5 py-2 rounded-full font-medium transition"
-                style="background: var(--primary); color: white;" onmouseover="this.style.background='var(--secondary)'"
-                onmouseout="this.style.background='var(--primary)'">
-                Login
-            </a>
+
+            @if (Auth::user())
+                <div class="flex items-center gap-5">
+                    <a href="" class="text-[var(--primary)] text-xl relative">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="absolute text-[9px] bg-[red] text-white px-1 rounded-full -top-1 -right-1">2</span>
+                    </a>
+
+                    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" type="button"
+                        class="flex items-center gap-1 bg-[var(--primary)] text-white py-2 px-3.5 rounded-full text-sm font-medium">
+                        <span>
+                            {{ Str::substr(Auth::user()->name, 0, 1) }}
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Dropdown menu -->
+                <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
+                        </li>
+
+                        <li class="block px-4 py-2 hover:bg-red-100">
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button type="submit">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            @else
+                <a href="{{ route('login') }}" class="px-5 py-2 rounded-full font-medium transition"
+                    style="background: var(--primary); color: white;"
+                    onmouseover="this.style.background='var(--secondary)'"
+                    onmouseout="this.style.background='var(--primary)'">
+                    Login
+                </a>
+            @endif
+
+
+
         </div>
     </div>
 </header>
