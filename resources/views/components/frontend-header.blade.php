@@ -1,4 +1,4 @@
-<header class="w-full shadow bg-white">
+<header class="w-full shadow sticky top-0 z-50 bg-white">
     <div class="container mx-auto flex items-center justify-between px-4 py-3">
         <!-- Logo -->
         <a href="{{ route('home') }}" class="flex items-center gap-2">
@@ -26,9 +26,11 @@
 
             @if (Auth::user())
                 <div class="flex items-center gap-5">
-                    <a href="" class="text-[var(--primary)] text-xl relative">
+                    <a href="{{ route('cart.index') }}" class="text-[var(--primary)] text-xl relative">
                         <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="absolute text-[9px] bg-[red] text-white px-1 rounded-full -top-1 -right-1">2</span>
+                        <span class="absolute text-[9px] bg-[red] text-white px-1 rounded-full -top-1 -right-1">
+                            {{ Auth::user()->carts()->count() }}
+                        </span>
                     </a>
 
                     <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" type="button"

@@ -23,7 +23,9 @@
                         @endforeach
                     </div>
                 </div>
-
+                @php
+                    $amount = $product->price - ($product->price * $product->discount_percentage) / 100;
+                @endphp
                 <!-- Product Info -->
                 <div class="w-full md:w-1/2">
                     <h1 class="text-3xl font-bold text-[var(--primary)] mb-2">
@@ -31,7 +33,7 @@
                     </h1>
 
                     <div class="mb-6">
-                        Rs.{{ $product->price - ($product->price * $product->discount_percentage) / 100 }}
+                        Rs.{{ $amount }}
                         @if ($product->discount_percentage > 0)
                             <span class="text-[red] line-through">
                                 Rs.{{ $product->price }}
@@ -52,23 +54,26 @@
                             ordered</span>
                     </div>
 
-                    <div class="flex items-center mb-6">
-                        <span class="text-gray-700 mr-4">Quantity:</span>
-                        <div class="flex items-center border border-gray-300 rounded-md">
-                            <button class="px-3 py-2 text-gray-600" onclick="decreaseQuantity()">-</button>
-                            <input type="number" id="quantity" value="1" min="1"
-                                class="w-12 text-center border-0 focus:ring-0">
-                            <button class="px-3 py-2 text-gray-600" onclick="increaseQuantity()">+</button>
+                    <form action="{{ route('cart.store', $product->id) }}" method="post">
+                        @csrf
+                        <div class="flex items-center mb-6">
+                            <span class="text-gray-700 mr-4">Quantity:</span>
+                            <div class="flex items-center border border-gray-300 rounded-md">
+                                <button type="button" class="px-3 py-2 text-gray-600" onclick="decreaseQuantity()">-</button>
+                                <input type="number" id="quantity" value="1" min="1" name="qty"
+                                    class="w-12 text-center border-0 focus:ring-0">
+                                <button type="button" class="px-3 py-2 text-gray-600" onclick="increaseQuantity()">+</button>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="flex space-x-4">
-                        <button
-                            class="bg-[var(--primary)] hover:bg-[var(--secondary)] text-white py-3 px-6 rounded-lg flex items-center transition-colors">
-                            <i class="fas fa-shopping-cart mr-2"></i>
-                            Add to Cart
-                        </button>
-                    </div>
+                        <div class="flex space-x-4">
+                            <button
+                                class="bg-[var(--primary)] hover:bg-[var(--secondary)] text-white py-3 px-6 rounded-lg flex items-center transition-colors">
+                                <i class="fas fa-shopping-cart mr-2"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

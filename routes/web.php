@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\ProfileController;
@@ -17,13 +18,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post("/cart/store/{id}", [CartController::class, 'store'])->name("cart.store");
+    Route::get("/carts", [CartController::class, 'index'])->name("cart.index");
+    Route::patch("/cart/update/{id}", [CartController::class, 'update'])->name("cart.update");
+    Route::delete("/cart/delete/{id}", [CartController::class, 'destroy'])->name("cart.destroy");
 });
 
-Route::get("/",[PageController::class,'home'])->name("home");
-Route::post("/shop/store",[ShopController::class,'store'])->name("shop.store");
+Route::get("/", [PageController::class, 'home'])->name("home");
+Route::post("/shop/store", [ShopController::class, 'store'])->name("shop.store");
 
-Route::get("/search",[PageController::class,'search'])->name("search");
-Route::get("/product/{id}",[PageController::class,'product'])->name("product");
+Route::get("/search", [PageController::class, 'search'])->name("search");
+Route::get("/product/{id}", [PageController::class, 'product'])->name("product");
 
 
 // Login with google routes
@@ -36,11 +42,11 @@ Route::get('/callback', function () {
 
     $oldUser = User::where('email', $user->email)->first();
 
-    if(!$oldUser){
+    if (!$oldUser) {
         $newUser = User::create([
             'name' => $user->name,
             'email' => $user->email,
-            'password' => Hash::make(rand(1000,9999)),
+            'password' => Hash::make(rand(1000, 9999)),
         ]);
 
         Auth::login($newUser);
@@ -53,6 +59,6 @@ Route::get('/callback', function () {
 });
 
 
-Route::fallback([PageController::class,'fallback'])->name("fallback");
+Route::fallback([PageController::class, 'fallback'])->name("fallback");
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
