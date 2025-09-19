@@ -23,3 +23,28 @@ p {
 button {
     cursor: pointer;
 }
+
+.checkout-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.form-input:focus {
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.payment-option {
+    transition: all 0.2s ease;
+}
+
+.payment-option:hover {
+    transform: translateY(-2px);
+}
+
+.order-item {
+    transition: background-color 0.2s ease;
+}
+
+.order-item:hover {
+    background-color: #f8f9fa;
+}

@@ -86,10 +86,10 @@
                         <p class="text-xl font-semibold text-[var(--primary)]">
                             Subtotal: Rs. {{ number_format($shopCarts->sum('amount'), 2) }}
                         </p>
-                        <button onclick="placeOrder({{ $shopId }})"
+                        <a href="{{route('checkout', $shopCarts->first()->product->shop->id)}}"
                             class="bg-[var(--secondary)] text-white px-8 py-3 rounded-full hover:bg-opacity-80 transition duration-300 font-medium">
                             Place Order
-                        </button>
+                        </a>
                     </div>
                 </div>
             @endforeach

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\ProfileController;
@@ -23,6 +24,9 @@ Route::middleware('auth')->group(function () {
     Route::get("/carts", [CartController::class, 'index'])->name("cart.index");
     Route::patch("/cart/update/{id}", [CartController::class, 'update'])->name("cart.update");
     Route::delete("/cart/delete/{id}", [CartController::class, 'destroy'])->name("cart.destroy");
+
+    Route::get("/checkout/{id}", [OrderController::class, 'checkout'])->name("checkout");
+    Route::post("/order/store/{id}", [OrderController::class, 'store'])->name("order.store");
 });
 
 Route::get("/", [PageController::class, 'home'])->name("home");
