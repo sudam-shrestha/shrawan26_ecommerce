@@ -24,7 +24,7 @@ class CartController extends BaseController
         ]);
 
         $product = Product::findOrFail($id);
-        $amount = $product->price - ($product->price * $product->discount_percentage) / 100;
+        $amount = ($product->price - ($product->price * $product->discount_percentage) / 100) * $request->qty;
 
         $cart = new Cart();
         $cart->qty = $request->qty;
@@ -44,7 +44,7 @@ class CartController extends BaseController
 
         $cart = Cart::where('user_id', Auth::user()->id)->findOrFail($id);
         $product = Product::findOrFail($cart->product_id);
-        $amount = $product->price - ($product->price * $product->discount_percentage) / 100;
+        $amount = ($product->price - ($product->price * $product->discount_percentage) / 100)*$request->qty;
 
         $cart->qty = $request->qty;
         $cart->amount = $amount * $request->qty;

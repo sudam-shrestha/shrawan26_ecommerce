@@ -3,13 +3,37 @@
 
     <section>
         <div class="container py-10">
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">
-                    Our Products
-                </h2>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, fugit!
-                </p>
+            <div class="flex justify-between items-center">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">
+                        Our Products
+                    </h2>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, fugit!
+                    </p>
+                </div>
+
+                <div>
+                    <button type="button" id="filterDropdown" data-dropdown-toggle="filter"
+                        class="px-5 py-2 rounded-full font-medium transition" style="color: var(--primary);">
+                        <i class="fa-solid fa-filter text-2xl"></i>
+                    </button>
+
+                    <!-- Dropdown menu -->
+                    <div id="filter" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+                        <ul class="py-2 text-sm text-gray-700" aria-labelledby="filterDropdown">
+                            <li>
+                                <a href="{{ route('home', ['sort' => 'desc']) }}" class="block px-4 py-2 hover:bg-gray-100">Price (high to low)</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('home', ['sort' => 'asc']) }}" class="block px-4 py-2 hover:bg-gray-100">Price (low to high)</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('home', ['sort' => 'latest']) }}" class="block px-4 py-2 hover:bg-gray-100">Latest</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <div class="grid grid-cols-4 gap-6">

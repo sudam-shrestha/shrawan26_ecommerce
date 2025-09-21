@@ -25,8 +25,14 @@ Route::middleware('auth')->group(function () {
     Route::patch("/cart/update/{id}", [CartController::class, 'update'])->name("cart.update");
     Route::delete("/cart/delete/{id}", [CartController::class, 'destroy'])->name("cart.destroy");
 
+    Route::get("/orders", [OrderController::class, 'index'])->name("order");
+
+
     Route::get("/checkout/{id}", [OrderController::class, 'checkout'])->name("checkout");
     Route::post("/order/store/{id}", [OrderController::class, 'store'])->name("order.store");
+
+    Route::get("/khalti/callback", [OrderController::class, 'khalti_callback'])->name("khalti.callback");
+
 });
 
 Route::get("/", [PageController::class, 'home'])->name("home");
@@ -34,6 +40,8 @@ Route::post("/shop/store", [ShopController::class, 'store'])->name("shop.store")
 
 Route::get("/search", [PageController::class, 'search'])->name("search");
 Route::get("/product/{id}", [PageController::class, 'product'])->name("product");
+
+Route::get("/receipt/{id}", [PageController::class, 'receipt'])->name("receipt");
 
 
 // Login with google routes

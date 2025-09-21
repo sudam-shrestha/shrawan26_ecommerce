@@ -45,7 +45,7 @@
                 <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
                     <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                         <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
+                            <a href="{{ route('order') }}" class="block px-4 py-2 hover:bg-gray-100">Order</a>
                         </li>
 
                         <li class="block px-4 py-2 hover:bg-red-100">
@@ -57,12 +57,31 @@
                     </ul>
                 </div>
             @else
-                <a href="{{ route('login') }}" class="px-5 py-2 rounded-full font-medium transition"
+                <button type="button" id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="px-5 py-2 rounded-full font-medium transition"
                     style="background: var(--primary); color: white;"
                     onmouseover="this.style.background='var(--secondary)'"
                     onmouseout="this.style.background='var(--primary)'">
-                    Login
-                </a>
+                    Login <i class="fa-solid fa-circle-chevron-down"></i>
+                </button>
+
+                <!-- Dropdown menu -->
+                <div id="dropdown"
+                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
+                        <li>
+                            <a href="{{route('login')}}"
+                                class="block px-4 py-2 hover:bg-gray-100">User</a>
+                        </li>
+                        <li>
+                            <a href="/shop" target="_blank"
+                                class="block px-4 py-2 hover:bg-gray-100">Shop</a>
+                        </li>
+                        <li>
+                            <a href="/admin" target="_blank"
+                                class="block px-4 py-2 hover:bg-gray-100">Admin</a>
+                        </li>
+                    </ul>
+                </div>
             @endif
 
 
